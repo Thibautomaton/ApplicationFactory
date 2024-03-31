@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block page_content %}
+{% import "bootstrap/wtf.html" as wtf %}
+{{form.hidden_tag()}}
+{{wtf.quick_form(form)}}
+<br>
+the user is known: {{known}}
+
+{% endblock %}
