@@ -33,4 +33,16 @@ class BasicsTestCase(unittest.TestCase):
         user = User.query.filter_by(name="john").first()
         self.assertTrue(user is not None)
 
+    def test_verify_password_hash(self):
+        u = User(password='adibou')
+        self.assertTrue(u.verify_password_hash('adibou'))
+
+    def test_different_password(self):
+        u = User(password='adibou')
+        self.assertFalse(u.verify_password_hash('tchoum'))
+
+    def test_password_salts_are_random(self):
+        u1 = User(password="adibou")
+        u2 = User(password="adibou")
+        self.assertTrue(u1.password_hash!=u2.password_hash)
 

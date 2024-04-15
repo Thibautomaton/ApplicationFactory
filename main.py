@@ -31,8 +31,15 @@ def test(test_names):
 
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
+        admin_role = Role(name="Admin", id=1)
+        user_john = User(email = "email@gmail.com", username="john", role = admin_role, password="password")
+        db.session.add_all([admin_role, user_john])
+        db.session.commit()
 
-    app.run(debug=True)
+        app.run(debug=True)
 
 """
 # Press the green button in the gutter to run the script.

@@ -4,6 +4,8 @@ from .forms import NameForm
 from .. import db
 from ..models import User
 
+from flask_login import login_required
+
 
 @main.route("/", methods=["GET", "POST"])
 def index():
@@ -20,3 +22,8 @@ def index():
             flash("user was already in database")
         return redirect(url_for('.index'))
     return render_template('index.html', form=form, known=session.get("known"))
+
+@main.route('/secret')
+@login_required
+def secret():
+    return "<h1>You reached well done!</h1>"
